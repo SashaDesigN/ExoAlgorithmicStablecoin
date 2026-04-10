@@ -7,17 +7,17 @@ import { ERC20Mock } from "../test/mocks/ERC20Mock.sol";
 contract HelperConfig is Script {
 
     struct NetworkConfig {
-        address wethUSDPriceFeed;
-        address wBTCUSDPriceFeed;
+        address wethUsdPriceFeed;
+        address wbtcUsdPriceFeed;
         address weth;
         address wbtc;
         uint256 deployerKey;
     }
 
     NetworkConfig public activeNetworkConfig;
-    // uint8 public constant DECIMALS = 8;
-    // int256 public constant ETH_USD_PRICE = 2000e8;
-    // int256 public constant BTC_USD_PRICE = 1000e8;
+    uint8 public constant DECIMALS = 8;
+    int256 public constant ETH_USD_PRICE = 2000e8;
+    int256 public constant BTC_USD_PRICE = 1000e8;
 
     uint256 public DEFAULT_ANVIL_PRIVATE_KEY = 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 
