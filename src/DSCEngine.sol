@@ -30,6 +30,7 @@ contract DSCEngine is ReentrancyGuard {
     error DSCEngine_TokenNotAllowed();
     error DSCEngine_TransferFail();
     error DSCEngine_HealthFactorReached(uint256 healthFactor);
+    error DSCEngine_MintFail();
 
     ///////////
     // state //
@@ -123,6 +124,11 @@ contract DSCEngine is ReentrancyGuard {
     {
         s_DSCMinted[msg.sender] += amount;
         _revertIfHealthFactorBroken(msg.sender);
+        bool minted = i_dcs.mint(msg.sender, amount);
+
+        if (!minted) {
+            revert DSCEngine_MintFail();
+        }
     }
 
     function liquidate() external {}
@@ -175,5 +181,3 @@ contract DSCEngine is ReentrancyGuard {
         return (uint256(uint256(price) * DECIMALS_PRECISION) * amount) / PRECISION;
     }
 }
-
-// 
